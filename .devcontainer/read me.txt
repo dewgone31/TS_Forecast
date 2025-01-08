@@ -1,0 +1,10 @@
+# this script was made running on Python 3.11.8
+
+# step 1
+# install Python 3.11.8 (cant gaurentee the script will work otherwise)
+
+# step 2
+# after install completed run: pip install requirments.txt (you may be told told to update pip)
+
+# step 3
+# after libs install navigate to foldel containing main.py and run: streamlit run main.py
