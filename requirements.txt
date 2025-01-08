@@ -1,8 +1,8 @@
 --upgrade pip
+phik==0.12.0
 scikit-learn
 streamlit
 pandas
 streamlit-pandas-profiling
 pycaret
 ydata-profiling
-phik==0.12.0
