@@ -16,7 +16,6 @@ with st.sidebar:
     st.image("https://www.politico.com/interactives/uploads/image-service/2023/3/15/e516e3bf6e-420.png", width=150)
     st.title("Trump Will Tell")
     choice = st.radio("Select the task", ["Upload", "Filter", "Profiling", "Target", "Comparison", "Final Plot"])
-    st.info("This project application helps you build and explore your data.")
 
 # Upload section
 if choice == "Upload":
@@ -26,7 +25,6 @@ if choice == "Upload":
         try:
             df = pd.read_csv(file, index_col=None)
             st.session_state['df'] = df  # Save dataset to session_state
-            df.to_csv("dataset.csv", index=False)  # Save locally
             st.success("Dataset uploaded successfully!")
             st.dataframe(df.head())
         except Exception as e:
@@ -85,12 +83,12 @@ if choice == "Target":
         st.dataframe(df.head())
 
         # Predefined date column (update the name as per your dataset)
-        predefined_date_column = "Date"  # Replace with your actual date column name
+        predefined_date_column = st.selectbox("Select the date column", options=df.columns, help="Choose the column to forecast.")
         if predefined_date_column not in df.columns:
             st.error(f"The predefined date column '{predefined_date_column}' is not found in the dataset.")
         else:
             date_column = predefined_date_column  # Set the date column automatically
-            st.success(f"Date column automatically set to '{date_column}'.")
+            st.success(f"Date column set to '{date_column}'.")
 
         # Target column selection
         chosen_target = st.selectbox("Select the target column", options=df.columns, help="Choose the column to forecast.")
@@ -135,7 +133,6 @@ if choice == "Comparison":
             st.error("Target column not selected. Please go back to 'Target' to set up your data.")
         else:
             st.info(f"Target column: {chosen_target}")
-            st.info("PyCaret will compare available time series models to find the best one.")
 
             # Add a reset button to allow re-running the comparison
             if st.button("Reset Model Comparison"):
@@ -193,7 +190,7 @@ if choice == "Final Plot":
         fine_tuned_model = st.session_state['fine_tuned_model']
 
         # Define the maximum limit for n_sessions
-        MAX_SESSIONS = 53  # Adjust based on your use case
+        MAX_SESSIONS = 366  # Adjust based on your use case
         n_sessions = st.number_input(
             "Enter number of future periods to forecast:",
             min_value=1,
@@ -217,3 +214,5 @@ if choice == "Final Plot":
             st.error(f"Error generating the final plot: {e}")
     else:
         st.warning("No fine-tuned model found. Please fine-tune a model first.")
+
+
