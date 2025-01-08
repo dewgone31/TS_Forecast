@@ -1,0 +1,5 @@
+streamlit
+pandas
+streamlit-pandas-profiling
+pycaret
+ydata-profiling
