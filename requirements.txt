@@ -3,3 +3,4 @@ pandas
 streamlit-pandas-profiling
 pycaret
 ydata-profiling
+scikit-learn
